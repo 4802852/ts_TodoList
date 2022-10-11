@@ -5,7 +5,7 @@ const TodoTemplateBlock = styled.div`
   width: 512px;
   height: 768px;
 
-  postion: relative;
+  position: relative;
   background: white;
   border-radius: 16px;
   box-shadow: 0 0 8px 9 rgba(0, 0, 0, 0.04);
@@ -18,11 +18,7 @@ const TodoTemplateBlock = styled.div`
   flex-direction: column;
 `;
 
-type TodoProps = {
-  children: any;
-};
-
-function TodoTemplate({ children }: TodoProps) {
+function TodoTemplate({ children }: any) {
   return <TodoTemplateBlock>{children}</TodoTemplateBlock>;
 }
 
