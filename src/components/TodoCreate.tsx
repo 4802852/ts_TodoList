@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import styled, { css } from "styled-components";
 import { MdAdd } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../slices/TodoSlice";
 
 const CircleButton = styled.button<{ open: boolean }>`
   background: #38d9a9;
@@ -74,15 +76,28 @@ const Input = styled.input`
 
 function TodoCreate() {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const [content, setContent] = useState("");
 
   const onToggle = () => setOpen(!open);
+
+  const handleChangeContent = (e: any) => {
+    console.log(e);
+    setContent(e.target.value);
+  };
+
+  const handleEnterKey = (e: FormEvent) => {
+    e.preventDefault();
+    dispatch(addTodo(content));
+    setContent("");
+  };
 
   return (
     <>
       {open && (
         <InsertFormPositioner>
-          <InsertForm>
-            <Input autoFocus placeholder="할 일을 입력 후, Enter 를 누르세요" />
+          <InsertForm onSubmit={handleEnterKey}>
+            <Input autoFocus placeholder="할 일을 입력 후, Enter 를 누르세요" type="text" value={content} onChange={handleChangeContent} />
           </InsertForm>
         </InsertFormPositioner>
       )}

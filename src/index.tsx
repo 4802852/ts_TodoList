@@ -1,35 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./components/App";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-// import {configureStore} from '@reduxjs/toolkit';
-
-// import logger from 'redux-logger';
-
-// const rootReducer = {}
-
-// const preloadedState = {
-//   todos: [
-//     {
-//       text: 'Eat foot',
-//       completed: true,
-//     },
-//     {
-//       text: 'Exercise',
-//       completed: false
-//     },
-//   ],
-//   visibilityFilter: 'SHOW_COMPLTED',
-// }
-
-// const store = configureStore({reducer: rootReducer, middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger), devTools: process.env.NODE_ENV !== 'production', preloadedState, enhancers: []})
+import { Provider } from "react-redux";
+import store from "./store";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
