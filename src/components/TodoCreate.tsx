@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from "react";
 import styled, { css } from "styled-components";
 import { MdAdd } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../slices/TodoSlice";
+import { CREATE } from "../slices/TodoSlice";
 
 const CircleButton = styled.button<{ open: boolean }>`
   background: #38d9a9;
@@ -82,13 +82,12 @@ function TodoCreate() {
   const onToggle = () => setOpen(!open);
 
   const handleChangeContent = (e: any) => {
-    console.log(e);
     setContent(e.target.value);
   };
 
   const handleEnterKey = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(addTodo(content));
+    dispatch(CREATE(content));
     setContent("");
   };
 

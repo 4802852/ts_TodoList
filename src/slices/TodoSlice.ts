@@ -34,7 +34,7 @@ const todoSlice = createSlice({
   name: "todos",
   initialState: preloadState,
   reducers: {
-    addTodo: {
+    CREATE: {
       reducer: (state, action: PayloadAction<Item>) => {
         state.push(action.payload);
       },
@@ -44,9 +44,28 @@ const todoSlice = createSlice({
         return { payload: { id, text, done } };
       },
     },
+    TOGGLE: {
+      reducer: (state, action: PayloadAction<{ id: string }>) => {
+        state.forEach((todo) => (todo.id === action.payload.id ? (todo.done = !todo.done) : todo));
+      },
+      prepare: (id: string) => {
+        return { payload: { id } };
+      },
+    },
+    REMOVE: {
+      reducer: (state, action: PayloadAction<{ id: string }>) => {
+        state.splice(
+          state.findIndex((todo) => todo.id === action.payload.id),
+          1
+        );
+      },
+      prepare: (id: string) => {
+        return { payload: { id } };
+      },
+    },
   },
 });
 
 const { actions, reducer } = todoSlice;
-export const { addTodo } = actions;
+export const { CREATE, TOGGLE, REMOVE } = actions;
 export default reducer;

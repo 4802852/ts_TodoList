@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { MdDone, MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
+import { TOGGLE, REMOVE } from "../slices/TodoSlice";
 
 const Remove = styled.div`
   display: flex;
@@ -66,11 +67,15 @@ type TodoProps = {
 
 function TodoItem({ id, done, text }: TodoProps) {
   const dispatch = useDispatch();
+  const onToggle = () => dispatch(TOGGLE(id));
+  const onRemove = () => dispatch(REMOVE(id));
   return (
     <TodoItemBlock>
-      <CheckCircle done={done}>{done && <MdDone />}</CheckCircle>
+      <CheckCircle done={done} onClick={onToggle}>
+        {done && <MdDone />}
+      </CheckCircle>
       <Text done={done}>{text}</Text>
-      <Remove>
+      <Remove onClick={onRemove}>
         <MdDelete />
       </Remove>
     </TodoItemBlock>
